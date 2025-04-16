@@ -104,6 +104,49 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	ListNode *ll1_cur = ll1->head;
+	ListNode *ll2_cur = ll2->head;
+	if (ll1_cur == NULL || ll2_cur == NULL)
+	{
+		printf("No Empty List");
+		return;
+	}
+	while (ll1_cur->next != NULL && ll2_cur != NULL)
+	{
+		ListNode *ll1_next_node = ll1_cur->next;
+		ListNode *new_node = malloc(sizeof(ListNode));
+		new_node->item = ll2_cur->item;
+		new_node->next = ll1_cur->next;
+		ll1_cur->next = new_node;
+
+		//다음 리스트로 넘기는 과정
+		ll1_cur = ll1_next_node;
+
+		ll2_cur = ll2->head->next;
+		free(ll2->head);
+		ll2->head = ll2_cur;
+		ll2->size--;
+	}
+	if (ll1_cur->next == NULL && ll2_cur != NULL)
+	{
+		ListNode *new_node = malloc(sizeof(ListNode));
+		new_node->item = ll2_cur->item;
+		new_node->next = NULL;
+		ll1_cur->next = new_node;
+		
+		if (ll2->size == 1)
+		{
+			free(ll2->head);
+			ll2->head =NULL;
+			return;
+		}
+		
+		ll2_cur = ll2->head->next;
+		free(ll2->head);
+		ll2->head = ll2_cur;
+		ll2->size--;
+	}
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

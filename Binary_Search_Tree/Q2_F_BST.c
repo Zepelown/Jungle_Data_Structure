@@ -91,6 +91,33 @@ int main()
 void inOrderTraversal(BSTNode *root)
 {
 	 /* add your code here */
+	 Stack stack;
+	 stack.top = NULL;
+
+	 BSTNode * cur = root;
+	 push(&stack, cur);	
+	 while (cur->left != NULL)
+	 {
+		push(&stack, cur->left);	
+		cur = cur->left;
+	 }
+	 while (!isEmpty(&stack))
+	 {
+		BSTNode *poll = pop(&stack);
+		printf("%d ", poll->item);
+		//만약 오른쪽 노드가 존재하면 거기서 또 제일 왼쪽을 다 꺼내야 함
+		if (poll->right!=NULL)
+		{
+			cur = poll->right;
+			push(&stack, cur);
+			while (cur->left != NULL)
+			{
+				push(&stack, cur->left);
+				cur = cur->left;
+			}
+		}
+	 } 
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////

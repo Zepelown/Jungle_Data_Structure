@@ -87,6 +87,49 @@ int main()
 void moveEvenItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	if (ll->size < 2)
+	{
+		return;
+	}
+	
+	ListNode *even_head = NULL, *even_tail = NULL;
+	ListNode *odd_head = NULL, *odd_tail = NULL;
+	ListNode *cur = ll->head;
+	while (cur!=NULL)
+	{
+		if (cur->item % 2 == 0)
+		{
+			if (even_head == NULL)
+			{
+				even_head = cur;
+				even_tail = cur;
+			} else {
+				even_tail->next = cur;
+				even_tail = cur; 
+			}
+		} else {
+			if (odd_head == NULL)
+			{
+				odd_head = cur;
+				odd_tail = cur;
+			} else {
+				odd_tail->next = cur;
+				odd_tail = cur;
+			}
+		}
+
+		cur = cur->next;
+	}
+	if (odd_head != NULL)
+	{
+		odd_tail->next = even_head;
+		ll->head = odd_head;
+	} else {
+		ll->head = even_head;
+	}
+	if (even_tail != NULL){
+		even_tail->next =NULL;
+	}	// 이거 안하면 쓰레기값 들어가서 리스트 표시할 때, 무한 루프 생성됨
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

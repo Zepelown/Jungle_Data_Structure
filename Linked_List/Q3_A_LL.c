@@ -83,11 +83,48 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
+void moveOddItemsToBack(LinkedList *ll) {
+    if (ll->size < 2) return;
 
-void moveOddItemsToBack(LinkedList *ll)
-{
-	/* add your code here */
+    ListNode *evenHead = NULL, *evenTail = NULL;
+    ListNode *oddHead = NULL, *oddTail = NULL;
+    ListNode *cur = ll->head;
+
+    while (cur != NULL) {
+        if (cur->item % 2 == 0) { // Even node
+            if (evenHead == NULL) {
+                evenHead = cur;
+                evenTail = cur;
+            } else {
+                evenTail->next = cur;
+                evenTail = cur;
+            }
+        } else { // Odd node
+            if (oddHead == NULL) {
+                oddHead = cur;
+                oddTail = cur;
+            } else {
+                oddTail->next = cur;
+                oddTail = cur;
+            }
+        }
+        cur = cur->next;
+    }
+
+    // Link even list to odd list
+    if (evenHead != NULL) {
+        evenTail->next = oddHead;
+        ll->head = evenHead;
+    } else {
+        ll->head = oddHead;
+    }
+
+    // Terminate the merged list
+    if (oddTail != NULL) {
+        oddTail->next = NULL;
+    }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 

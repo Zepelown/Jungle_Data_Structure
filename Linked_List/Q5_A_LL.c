@@ -103,6 +103,38 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	if (ll->size <= 1)
+	{
+		printf("Can't split the list");
+		return;
+	}
+	int middle = ll->size / 2;
+	
+	int current =0;
+	ListNode *cur = malloc(sizeof(ListNode));
+	cur = ll->head;
+
+	resultFrontList->head = cur;
+
+	if (ll->size % 2 == 0)
+	{
+		/* code */
+		for (int i = 1; i < middle; i++)
+		{
+			cur = cur->next;
+		}
+
+	}else{
+		for (int i = 1; i <= middle; i++)
+		{
+			cur = cur->next;
+		}
+	}
+
+	ListNode *front_end_node = cur;
+	resultBackList->head = cur->next;
+	cur->next = NULL;
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

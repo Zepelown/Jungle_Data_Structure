@@ -85,10 +85,39 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////////////////
-
+// 헤드의 주소를 변경해야 하므로
 int moveMaxToFront(ListNode **ptrHead)
 {
     /* add your code here */
+	ListNode *cur = *ptrHead;
+	ListNode *max_node = NULL;
+	ListNode *prev_max_node = NULL;
+	max_node = cur;
+	int max = cur->item;
+	while (cur->next != NULL)
+	{
+		if (cur->next->item > max)
+		{
+			max_node = cur->next;
+			prev_max_node = cur;
+			max = cur->next->item;
+		}
+		cur = cur->next;
+	}
+	if (cur == *ptrHead)
+	{
+		printf("Size is 1");
+		return -1;
+	}
+
+	if (max_node->next == NULL)
+	{
+		prev_max_node->next = NULL;
+	} else {
+		prev_max_node->next = max_node->next;
+	}
+	max_node->next = *ptrHead;
+	*ptrHead = max_node;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

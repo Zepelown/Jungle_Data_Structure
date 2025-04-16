@@ -113,6 +113,28 @@ int main()
 void reverse(Queue *q)
 {
 /* add your code here */
+	if (isEmptyQueue(q))
+	{
+		printf("Emtpy Queue");
+		return;
+	}
+	Stack stack;
+
+	stack.ll.head = NULL;
+	stack.ll.size = 0;
+	stack.ll.tail = NULL;
+
+	while (!isEmptyQueue(q))
+	{
+		int poll = dequeue(q);
+		push(&stack,poll);
+	}
+	
+	while (!isEmptyStack(&stack))
+	{
+		int data = pop(&stack);
+		enqueue(q,data);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

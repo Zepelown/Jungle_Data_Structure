@@ -111,7 +111,15 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+	if (isEmptyStack(s))
+	{
+		printf("Empty Stack");
+		return;
+	}
+	while (s->ll.head->item != value)
+	{
+		pop(s);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
